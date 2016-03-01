@@ -13,18 +13,15 @@ func main() {
 	https := flag.Bool("https", true, "terminate https?")
 	crt := flag.String("crt", "crt", "certificate file path")
 	key := flag.String("key", "key", "key file path")
-	localPort := flag.String("listenOn", "443", "port to listen on")
     flag.Parse()
 
+    localAddr := ":80"
     if *https {
-        *localPort = "443"
-    } else {
-        *localPort = "80"
+        localAddr = ":443"
     }
 
     log.Println("Using following config:")
     log.Println("\thttps:", *https)
-    log.Println("\tlocalPort:", *localPort)
     log.Println("\tcrt:", *crt)
     log.Println("\tkey:", *key)
     log.Println("\tbackend:", *backend)
@@ -34,9 +31,10 @@ func main() {
 		Host:   *backend,
 	})
 
+    log.Println("Listening on:", localAddr)
 	if *https {
-		log.Fatal(http.ListenAndServeTLS(":"+*localPort, *crt, *key, proxy))
+		log.Fatal(http.ListenAndServeTLS(localAddr, *crt, *key, proxy))
 	} else {
-		log.Fatal(http.ListenAndServe(":"+*localPort, proxy))
+		log.Fatal(http.ListenAndServe(localAddr, proxy))
 	}
 }
