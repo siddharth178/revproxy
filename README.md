@@ -15,11 +15,20 @@ Usage of $GOROOT/bin/revproxy:
         terminate https? (default true)
   -key string
         key file path (default "key")
-  -listenOn string
-        port to listen on (default "443")
 ```
 #### example
 ```
 sudo revproxy -backend=demo.io:80 -crt=/tmp/crt -key=/tmp/key
 ```
 This will start revproxy process that listens on local port 443 and takes the traffic to backend running on host 'demo.io' on port 80. It will use certificate and key from location specified in arguments.
+
+Output
+```
+sudo revproxy -backend=demo.io:80
+2016/03/01 06:30:42 Using following config:
+2016/03/01 06:30:42     https: true
+2016/03/01 06:30:42     crt: crt
+2016/03/01 06:30:42     key: key
+2016/03/01 06:30:42     backend: demo.io:80
+2016/03/01 06:30:42 Listening on: :443
+```
