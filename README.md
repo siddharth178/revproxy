@@ -20,6 +20,6 @@ Usage of $GOROOT/bin/revproxy:
 ```
 #### example
 ```
-sudo ~/go/bin/revproxy -backend=demo.io:80 -crt=/tmp/crt -key=/tmp/key
+sudo revproxy -backend=demo.io:80 -crt=/tmp/crt -key=/tmp/key
 ```
 This will start revproxy process that listens on local port 443 and takes the traffic to backend running on host 'demo.io' on port 80. It will use certificate and key from location specified in arguments.
